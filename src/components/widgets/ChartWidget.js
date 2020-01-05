@@ -1,45 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Rnd } from "react-rnd";
-import { createChart } from "lightweight-charts";
+import Chart from "./Chart";
+import PropTypes from "prop-types";
 
-const ChartWidget = () => {
-  useEffect(() => {
-    const chart = createChart(document.getElementById("chart"), {
-      width: 400,
-      height: 300
-    });
-    const lineSeries = chart.addLineSeries();
-    lineSeries.setData([
-      { time: "2019-04-11", value: 80.01 },
-      { time: "2019-04-12", value: 96.63 },
-      { time: "2019-04-13", value: 76.64 },
-      { time: "2019-04-14", value: 81.89 },
-      { time: "2019-04-15", value: 74.43 },
-      { time: "2019-04-16", value: 80.01 },
-      { time: "2019-04-17", value: 96.63 },
-      { time: "2019-04-18", value: 76.64 },
-      { time: "2019-04-19", value: 81.89 },
-      { time: "2019-04-20", value: 74.43 }
-    ]);
-  }, []);
+const ChartWidget = ({ data }) => {
+  const [x] = useState(10);
+  const [y] = useState(10);
+  const [width, setWidth] = useState(800);
+  const [height, setHeight] = useState(400);
+
+  const resizeHandler = (e, direction, ref) => {
+    setWidth(
+      parseInt(ref.style.width.substr(0, ref.style.width.length - 2), 10)
+    );
+    setHeight(
+      parseInt(ref.style.height.substr(0, ref.style.height.length - 2), 10)
+    );
+  };
+
+  const style = {
+    overflow: "auto",
+    boxShadow:
+      "0 10px 10px 0 rgba(0, 0, 0, 0.12), 0 20px 20px 0 rgba(0, 0, 0, 0.219)",
+    borderRadius: "3px",
+    border: "double 2px #1f1e36"
+  };
   return (
     <Rnd
-      size={{ width: 320, height: 200 }}
-      position={{ x: 100, y: 400 }}
-      onDragStop={() => {
-        //   this.setState({ x: d.x, y: d.y });
-      }}
-      onResize={() => {
-        //   this.setState({
-        //     width: ref.offsetWidth,
-        //     height: ref.offsetHeight,
-        //     ...position
-        //   });
-      }}
+      style={style}
+      default={{ x, y, width, height }}
+      bounds="parent"
+      onResizeStop={resizeHandler}
     >
-      <div id="chart"></div>
+      <Chart data={data} width={width} height={height} />
     </Rnd>
   );
+};
+
+ChartWidget.propTypes = {
+  data: PropTypes.array.isRequired
 };
 
 export default ChartWidget;
