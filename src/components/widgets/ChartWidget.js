@@ -3,7 +3,7 @@ import { Rnd } from "react-rnd";
 import Chart from "./Chart";
 import PropTypes from "prop-types";
 
-const ChartWidget = ({ data }) => {
+const ChartWidget = ({ chartData }) => {
   const [x] = useState(10);
   const [y] = useState(10);
   const [width, setWidth] = useState(800);
@@ -32,13 +32,16 @@ const ChartWidget = ({ data }) => {
       bounds="parent"
       onResizeStop={resizeHandler}
     >
-      <Chart data={data} width={width} height={height} />
+      <Chart chartData={chartData} width={width} height={height} />
     </Rnd>
   );
 };
 
 ChartWidget.propTypes = {
-  data: PropTypes.array.isRequired
+  chartData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired
+  })
 };
 
 export default ChartWidget;

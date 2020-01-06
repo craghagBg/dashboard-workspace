@@ -23,9 +23,9 @@ class Chart extends React.Component {
       }
     });
     const candleSeries = this.chart.addCandlestickSeries({
-      title: "BTC/USD"
+      title: this.props.chartData.title
     });
-    candleSeries.setData(this.props.data);
+    candleSeries.setData(this.props.chartData.data);
   }
 
   componentDidUpdate() {
@@ -38,7 +38,10 @@ class Chart extends React.Component {
 }
 
 Chart.propTypes = {
-  data: PropTypes.array.isRequired,
+  chartData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired
+  }),
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired
 };

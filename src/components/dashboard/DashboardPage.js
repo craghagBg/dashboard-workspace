@@ -1,74 +1,46 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as courseActions from "../../redux/actions/courseActions";
-import * as authorActions from "../../redux/actions/authorActions";
+import * as chartActions from "../../redux/actions/chartActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 import ChartWidget from "../widgets/ChartWidget";
 
-class CoursesPage extends React.Component {
-  state = {
-    redirectToAddCoursePage: false
-  };
-
+class DashboardPage extends React.Component {
   componentDidMount() {
-    const { courses, authors, actions } = this.props;
+    const { charts, actions } = this.props;
 
-    if (courses.length === 0) {
-      actions.loadCourses().catch(error => {
-        alert("Loading courses failed" + error);
-      });
-    }
-
-    if (authors.length === 0) {
-      actions.loadAuthors().catch(error => {
-        alert("Loading authors failed" + error);
+    if (charts.length === 0) {
+      actions.loadCharts().catch(error => {
+        alert("Loading charts data failed" + error);
       });
     }
   }
 
-  handleDeleteCourse = async course => {
-    toast.success("Course deleted");
-    try {
-      await this.props.actions.deleteCourse(course);
-    } catch (error) {
-      toast.error("Delete failed. " + error.message, { autoClose: false });
-    }
-  };
-
   render() {
     return (
       <>
-        <div className="text-center p-3">
-          {this.props.loading && <Spinner />}
-        </div>
-        <ChartWidget />
+        {this.props.loading && <Spinner className="text-center p-3" />}
+        {this.props.charts.length > 0 && (
+          <div className="dashboard-container">
+            <ChartWidget chartData={this.props.charts[0]} />
+          </div>
+        )}
       </>
     );
   }
 }
 
-CoursesPage.propTypes = {
-  authors: PropTypes.array.isRequired,
-  courses: PropTypes.array.isRequired,
+DashboardPage.propTypes = {
+  charts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    courses:
-      state.authors.length === 0
-        ? []
-        : state.courses.map(course => {
-            return {
-              ...course,
-              authorName: state.authors.find(a => a.id === course.authorId).name
-            };
-          }),
-    authors: state.authors,
+    charts: state.charts,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -76,11 +48,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
-      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
-      deleteCourse: bindActionCreators(courseActions.deleteCourse, dispatch)
+      loadCharts: bindActionCreators(chartActions.loadCharts, dispatch)
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
