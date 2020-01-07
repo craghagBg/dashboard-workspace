@@ -4,6 +4,7 @@ import { createChart } from "lightweight-charts";
 
 class Chart extends React.Component {
   chart = {};
+  candleSeries = {};
 
   componentDidMount() {
     this.chart = createChart(document.getElementById("chart"), {
@@ -22,14 +23,15 @@ class Chart extends React.Component {
         }
       }
     });
-    const candleSeries = this.chart.addCandlestickSeries({
+    this.candleSeries = this.chart.addCandlestickSeries({
       title: this.props.chartData.title
     });
-    candleSeries.setData(this.props.chartData.data);
+    this.candleSeries.setData(this.props.chartData.data);
   }
 
   componentDidUpdate() {
     this.chart.resize(this.props.height, this.props.width);
+    this.candleSeries.setData(this.props.chartData.data);
   }
 
   render() {

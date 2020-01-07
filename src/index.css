@@ -26,10 +26,35 @@ nav {
   padding: 20px 0 20px 0;
 }
 
+.select {
+  box-shadow: "0 10px 10px 0 rgba(0, 0, 0, 0.12), 0 20px 20px 0 rgba(0, 0, 0, 0.219)";
+  background-color: #1f1e36;
+  border-radius: 5px;
+  border: solid 1px;
+  color: #fff;
+}
+
 .dashboard-container {
   margin: 0 auto;
   min-width: 80%;
   height: 100%;
   border-radius: 5px;
   background-color: blanchedalmond;
+}
+
+.primery-bg {
+  background-color: "#1f1e36";
+}
+
+.primery-text {
+  color: "#fff";
+}
+
+select:focus {
+  outline: none;
+}
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
