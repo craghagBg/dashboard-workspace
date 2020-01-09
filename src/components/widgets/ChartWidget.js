@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Rnd } from "react-rnd";
 import Chart from "./Chart";
 import PropTypes from "prop-types";
-import initialState from "../../redux/reducers/initialState";
+import initialConstants from "../../initialConstants";
 
 const ChartWidget = ({ chartData }) => {
-  debugger;
-  const [x] = useState(initialState.x);
-  const [y] = useState(initialState.y);
-  const [width, setWidth] = useState(initialState.width);
-  const [height, setHeight] = useState(initialState.height);
+  const [x] = useState(initialConstants.chartPosition_x);
+  const [y] = useState(initialConstants.chartPosition_y);
+  const [width, setWidth] = useState(initialConstants.chartWidth);
+  const [height, setHeight] = useState(initialConstants.chartHeight);
 
   const resizeHandler = (e, direction, ref) => {
     setWidth(

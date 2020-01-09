@@ -41,15 +41,6 @@ nav {
   border-radius: 5px;
   background-color: blanchedalmond;
 }
-
-.primery-bg {
-  background-color: "#1f1e36";
-}
-
-.primery-text {
-  color: "#fff";
-}
-
 select:focus {
   outline: none;
 }
@@ -57,4 +48,13 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+.chart-icon {
+  background-color: #1f1e36;
+  border: 0px;
+}
+
+.text-app-color {
+  color: white;
 }

@@ -1,21 +1,14 @@
 import React, { useState } from "react";
 import { Rnd } from "react-rnd";
 import PropTypes from "prop-types";
+import Dropdown from "react-bootstrap/Dropdown";
+import initialConstants from "../../initialConstants";
 
 const Select = ({ pairNames, changeHandler }) => {
-  const [x] = useState(20);
-  const [y] = useState(20);
-  const [width, setWidth] = useState(200);
-  const [height, setHeight] = useState(60);
-
-  const resizeHandler = (e, direction, ref) => {
-    setWidth(
-      parseInt(ref.style.width.substr(0, ref.style.width.length - 2), 10)
-    );
-    setHeight(
-      parseInt(ref.style.height.substr(0, ref.style.height.length - 2), 10)
-    );
-  };
+  const [x] = useState(initialConstants.listPosition_x);
+  const [y] = useState(initialConstants.listPosition_y);
+  const [width] = useState(initialConstants.listWidth);
+  const [height] = useState(initialConstants.listHeight);
 
   return (
     <>
@@ -25,9 +18,8 @@ const Select = ({ pairNames, changeHandler }) => {
           default={{ x, y, width, height }}
           bounds="parent"
           enableResizing="false"
-          onResizeStop={resizeHandler}
         >
-          <select
+          {/* <select
             className="selectpicker mx-auto border-0"
             style={{ color: "#fff", backgroundColor: "#1f1e36" }}
             onChange={changeHandler}
@@ -39,7 +31,16 @@ const Select = ({ pairNames, changeHandler }) => {
                 </option>
               );
             })}
-          </select>
+          </select> */}
+          <Dropdown>
+            <Dropdown.Toggle>Dropdown Button</Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item>Action</Dropdown.Item>
+              <Dropdown.Item>Another action</Dropdown.Item>
+              <Dropdown.Item>Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Rnd>
       )}
     </>

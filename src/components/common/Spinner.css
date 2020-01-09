@@ -6,7 +6,7 @@
   height: 10em;
 }
 .loader {
-  margin: 60px auto;
+  margin: auto;
   font-size: 10px;
   position: relative;
   text-indent: -9999em;

@@ -2,7 +2,6 @@
 const fs = require("fs");
 const path = require("path");
 const mockData = require("./mockData");
-debugger;
 const data = JSON.stringify({ pairs: mockData.pairs });
 const filepath = path.join(__dirname, "db.json");
 

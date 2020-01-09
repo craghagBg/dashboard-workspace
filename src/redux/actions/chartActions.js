@@ -2,8 +2,12 @@ import * as types from "./actionTypes";
 import * as chartApi from "../../api/chartApi";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
 
-export function loadChartsSuccess(charts) {
-  return { type: types.LOAD_CHARTS_SUCCESS, charts };
+export function loadChartsSuccess(chartsData) {
+  return { type: types.LOAD_CHARTS_SUCCESS, chartsData };
+}
+
+export function setCurrentChart(currentChart) {
+  return { type: types.SET_CURRENT_CHART, currentChart };
 }
 
 export function loadCharts() {
@@ -11,9 +15,8 @@ export function loadCharts() {
     dispatch(beginApiCall());
     return chartApi
       .getCharts()
-      .then(charts => {
-        console.log(charts);
-        dispatch(loadChartsSuccess(charts));
+      .then(chartsData => {
+        dispatch(loadChartsSuccess(chartsData));
       })
       .catch(error => {
         dispatch(apiCallError(error));

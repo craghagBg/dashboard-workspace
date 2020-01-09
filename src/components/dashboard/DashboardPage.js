@@ -6,7 +6,8 @@ import { bindActionCreators } from "redux";
 import Spinner from "../common/Spinner";
 // import { toast } from "react-toastify";
 import ChartWidget from "../widgets/ChartWidget";
-import Select from "../widgets/Select";
+import List from "../widgets/List";
+import Notification from "../widgets/Notification";
 
 class DashboardPage extends React.Component {
   constructor(props) {
@@ -25,7 +26,6 @@ class DashboardPage extends React.Component {
       actions
         .loadCharts()
         .then(() => {
-          debugger;
           this.setState({ currentChart: this.props.charts[0] });
         })
         .catch(error => {
@@ -36,39 +36,46 @@ class DashboardPage extends React.Component {
 
   selectHandler(event) {
     event.preventDefault();
-    const currentChart = this.props.charts.find(chart => {
+    const { charts, actions } = this.props;
+
+    const currentChart = charts.chartsData.find(chart => {
       if (chart.title === event.target.value) {
         return chart;
       }
     });
-    this.setState({ currentChart });
+    actions.setCurrentChart(currentChart.title);
   }
 
   render() {
-    debugger;
     return (
-      <>
+      <div className="dashboard-container">
         {this.props.loading && <Spinner className="text-center p-3" />}
-        {this.props.charts.length > 0 && (
-          <div className="dashboard-container">
+        {this.props.charts.chartsData.length > 0 && (
+          <div>
             {this.state.currentChart && (
               <ChartWidget chartData={this.state.currentChart} />
             )}
-            {this.state.currentChart && (
-              <Select
-                pairNames={this.props.charts.map(chart => chart.title)}
+            {this.props.alerts.length > 0 && (
+              <Notification alerts={this.props.alerts} />
+            )}
+            {this.props.alerts > 0 && (
+              <List
+                pairNames={this.props.charts.chartsData.map(
+                  chart => chart.title
+                )}
                 changeHandler={this.selectHandler}
               />
             )}
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
 
 DashboardPage.propTypes = {
-  charts: PropTypes.array.isRequired,
+  charts: PropTypes.object.isRequired,
+  alerts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -76,6 +83,7 @@ DashboardPage.propTypes = {
 function mapStateToProps(state) {
   return {
     charts: state.charts,
+    alerts: state.alerts,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -83,7 +91,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadCharts: bindActionCreators(chartActions.loadCharts, dispatch)
+      loadCharts: bindActionCreators(chartActions.loadCharts, dispatch),
+      setCurrentChart: bindActionCreators(
+        chartActions.setCurrentChart,
+        dispatch
+      )
     }
   };
 }
