@@ -6,8 +6,8 @@ export function loadChartsSuccess(chartsData) {
   return { type: types.LOAD_CHARTS_SUCCESS, chartsData };
 }
 
-export function setCurrentChart(currentChart) {
-  return { type: types.SET_CURRENT_CHART, currentChart };
+export function setCurrentChart(currentChartName) {
+  return { type: types.SET_CURRENT_CHART, currentChartName };
 }
 
 export function loadCharts() {

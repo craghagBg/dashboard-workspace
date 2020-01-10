@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 
-const CreateAlert = ({ pairNames, createHandler }) => {
+const CreateAlert = ({ pairNames, createAlertHandler }) => {
   const [show, setShow] = useState(false);
   const [pair, setPair] = useState(pairNames[0]);
   const [value, setValue] = useState(0);
@@ -15,7 +15,7 @@ const CreateAlert = ({ pairNames, createHandler }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleSubmit = () => {
-    createHandler({ pair, value });
+    createAlertHandler({ pair, value });
     handleClose();
   };
 
@@ -68,7 +68,7 @@ const CreateAlert = ({ pairNames, createHandler }) => {
 
 CreateAlert.propTypes = {
   pairNames: PropTypes.array.isRequired,
-  createHandler: PropTypes.func.isRequired
+  createAlertHandler: PropTypes.func.isRequired
 };
 
 export default CreateAlert;

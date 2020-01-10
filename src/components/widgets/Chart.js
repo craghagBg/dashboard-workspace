@@ -7,9 +7,10 @@ class Chart extends React.Component {
   candleSeries = {};
 
   componentDidMount() {
+    const { width, height, currentChart } = this.props;
     this.chart = createChart(document.getElementById("chart"), {
-      width: this.props.width,
-      height: this.props.height,
+      width,
+      height,
       layout: {
         backgroundColor: "#000000",
         textColor: "rgba(255, 255, 255, 0.9)"
@@ -24,14 +25,14 @@ class Chart extends React.Component {
       }
     });
     this.candleSeries = this.chart.addCandlestickSeries({
-      title: this.props.chartData.title
+      title: currentChart.title
     });
-    this.candleSeries.setData(this.props.chartData.data);
+    this.candleSeries.setData(currentChart.data);
   }
 
   componentDidUpdate() {
     this.chart.resize(this.props.height, this.props.width);
-    this.candleSeries.setData(this.props.chartData.data);
+    this.candleSeries.setData(this.props.currentChart.data);
   }
 
   render() {
@@ -40,7 +41,7 @@ class Chart extends React.Component {
 }
 
 Chart.propTypes = {
-  chartData: PropTypes.shape({
+  currentChart: PropTypes.shape({
     title: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired
   }),

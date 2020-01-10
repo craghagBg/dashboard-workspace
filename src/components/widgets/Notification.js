@@ -21,7 +21,9 @@ const Notification = ({ alerts }) => {
       <h3 className="text-center">
         <p> 🔔</p>
         <p>Alert on {current.pair}</p>
-        <p>Crossing {current.value}</p>
+        <p>
+          {current.value} {current.pair.slice(-3)}
+        </p>
       </h3>
     </Rnd>
   );

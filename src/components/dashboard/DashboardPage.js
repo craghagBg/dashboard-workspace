@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as chartActions from "../../redux/actions/chartActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import Spinner from "../common/Spinner";
+import Spinner from "../spiner/Spinner";
 // import { toast } from "react-toastify";
 import ChartWidget from "../widgets/ChartWidget";
 import List from "../widgets/List";
@@ -12,69 +12,41 @@ import Notification from "../widgets/Notification";
 class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentChart: null
-    };
 
-    this.selectHandler = this.selectHandler.bind(this);
+    this.selectChartHandler = this.selectChartHandler.bind(this);
   }
 
-  componentDidMount() {
-    const { charts, actions } = this.props;
-
-    if (charts.length === 0) {
-      actions
-        .loadCharts()
-        .then(() => {
-          this.setState({ currentChart: this.props.charts[0] });
-        })
-        .catch(error => {
-          alert("Loading charts data failed" + error);
-        });
-    }
-  }
-
-  selectHandler(event) {
-    event.preventDefault();
-    const { charts, actions } = this.props;
-
-    const currentChart = charts.chartsData.find(chart => {
-      if (chart.title === event.target.value) {
-        return chart;
-      }
-    });
-    actions.setCurrentChart(currentChart.title);
+  selectChartHandler(event) {
+    debugger;
+    this.props.actions.setCurrentChart(event.target.value);
   }
 
   render() {
+    const { loading, charts, alerts } = this.props;
+    const currentChart = charts.chartsData.find(
+      chart => chart.title === charts.currentChartName
+    );
     return (
       <div className="dashboard-container">
-        {this.props.loading && <Spinner className="text-center p-3" />}
-        {this.props.charts.chartsData.length > 0 && (
-          <div>
-            {this.state.currentChart && (
-              <ChartWidget chartData={this.state.currentChart} />
-            )}
-            {this.props.alerts.length > 0 && (
-              <Notification alerts={this.props.alerts} />
-            )}
-            {this.props.alerts > 0 && (
-              <List
-                pairNames={this.props.charts.chartsData.map(
-                  chart => chart.title
-                )}
-                changeHandler={this.selectHandler}
-              />
-            )}
-          </div>
+        {loading && <Spinner className="text-center p-3" />}
+        {currentChart && <ChartWidget currentChart={currentChart} />}
+        {currentChart && (
+          <List
+            pairNames={charts.chartsData.map(chart => chart.title)}
+            selectChartHandler={this.selectChartHandler}
+          />
         )}
+        {alerts.length > 0 && <Notification alerts={this.props.alerts} />}
       </div>
     );
   }
 }
 
 DashboardPage.propTypes = {
-  charts: PropTypes.object.isRequired,
+  charts: PropTypes.shape({
+    chartsData: PropTypes.array.isRequired,
+    currentChartName: PropTypes.string.isRequired
+  }),
   alerts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired

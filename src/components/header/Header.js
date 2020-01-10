@@ -11,8 +11,8 @@ import PropTypes from "prop-types";
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.createHandler = this.createHandler.bind(this);
-    this.selectHandler = this.selectHandler.bind(this);
+    this.createAlertHandler = this.createAlertHandler.bind(this);
+    this.selectChartHandler = this.selectChartHandler.bind(this);
   }
 
   componentDidMount() {
@@ -25,20 +25,18 @@ class Header extends React.Component {
     }
   }
 
-  createHandler(pair) {
+  createAlertHandler(pair) {
     const { actions } = this.props;
     actions.createAlert(pair);
   }
 
-  selectHandler(pair) {
-    const { actions } = this.props;
-    actions.createAlert(pair);
+  selectChartHandler(event) {
+    this.props.actions.setCurrentChart(event.target.textContent);
   }
 
   render() {
     const { chartsData } = this.props.charts;
     const pairNames = chartsData.map(chart => chart.title);
-
     return (
       <Navbar>
         <Nav className="mr-auto">
@@ -53,12 +51,15 @@ class Header extends React.Component {
           </NavItem>
         </Nav>
         {window.location.pathname === "/dashboard" && chartsData.length > 0 && (
-          <AddChart pairNames={pairNames} selectHandler={this.selectHandler} />
+          <AddChart
+            pairNames={pairNames}
+            selectChartHandler={this.selectChartHandler}
+          />
         )}
         {window.location.pathname === "/dashboard" && chartsData.length > 0 && (
           <CreateAlert
             pairNames={pairNames}
-            createHandler={this.createHandler}
+            createAlertHandler={this.createAlertHandler}
           />
         )}
       </Navbar>
@@ -69,7 +70,7 @@ class Header extends React.Component {
 Header.propTypes = {
   charts: PropTypes.shape({
     chartsData: PropTypes.array.isRequired,
-    currentChart: PropTypes.string.isRequired
+    currentChartName: PropTypes.string.isRequired
   }),
   alerts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired

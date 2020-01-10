@@ -26,12 +26,23 @@ nav {
   padding: 20px 0 20px 0;
 }
 
-.select {
-  box-shadow: "0 10px 10px 0 rgba(0, 0, 0, 0.12), 0 20px 20px 0 rgba(0, 0, 0, 0.219)";
+.default {
+  color: #fff;
   background-color: #1f1e36;
+}
+
+.list {
+  box-shadow: "0 10px 10px 0 rgba(0, 0, 0, 0.12), 0 20px 20px 0 rgba(0, 0, 0, 0.219)";
   border-radius: 5px;
   border: solid 1px;
-  color: #fff;
+}
+
+.chart-container {
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.12),
+    0 20px 20px 0 rgba(0, 0, 0, 0.219);
+  border-radius: 3px;
+  border: 2px double #1f1e36;
+  overflow: hidden;
 }
 
 .dashboard-container {
