@@ -13,7 +13,7 @@ const Notification = ({ alerts }) => {
 
   return (
     <Rnd
-      className="p-2 primery-bg select text-center"
+      className="p-2 primery-bg select default text-center"
       default={{ x, y, width, height }}
       bounds="parent"
       enableResizing="false"

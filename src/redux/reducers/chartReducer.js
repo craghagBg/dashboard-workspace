@@ -6,7 +6,6 @@ export default (state = initialState.charts, action) => {
     case types.LOAD_CHARTS_SUCCESS:
       return { ...state, chartsData: action.chartsData };
     case types.SET_CURRENT_CHART:
-      debugger;
       return { ...state, currentChartName: action.currentChartName };
     default:
       return state;

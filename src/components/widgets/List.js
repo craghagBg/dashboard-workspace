@@ -13,7 +13,7 @@ const List = ({ pairNames, selectChartHandler }) => {
     <>
       {pairNames.length > 0 && (
         <Rnd
-          className="d-flex p-2 primery-bg list default"
+          className="d-flex p-2 primery-bg select default"
           default={{ x, y, width, height }}
           bounds="parent"
           enableResizing="false"

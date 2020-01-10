@@ -33,6 +33,9 @@ class Chart extends React.Component {
   componentDidUpdate() {
     this.chart.resize(this.props.height, this.props.width);
     this.candleSeries.setData(this.props.currentChart.data);
+    this.candleSeries.applyOptions({
+      title: this.props.currentChart.title
+    });
   }
 
   render() {

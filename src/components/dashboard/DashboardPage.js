@@ -17,20 +17,17 @@ class DashboardPage extends React.Component {
   }
 
   selectChartHandler(event) {
-    debugger;
     this.props.actions.setCurrentChart(event.target.value);
   }
 
   render() {
     const { loading, charts, alerts } = this.props;
-    const currentChart = charts.chartsData.find(
-      chart => chart.title === charts.currentChartName
-    );
+
     return (
       <div className="dashboard-container">
         {loading && <Spinner className="text-center p-3" />}
-        {currentChart && <ChartWidget currentChart={currentChart} />}
-        {currentChart && (
+        {charts.chartsData.length > 0 && <ChartWidget charts={charts} />}
+        {charts.chartsData.length > 0 && (
           <List
             pairNames={charts.chartsData.map(chart => chart.title)}
             selectChartHandler={this.selectChartHandler}
