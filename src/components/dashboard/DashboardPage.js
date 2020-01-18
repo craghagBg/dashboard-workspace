@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../spiner/Spinner";
@@ -8,23 +8,19 @@ import List from "../widgets/List";
 import Notification from "../widgets/Notification";
 
 const DashboardPage = ({ loading, charts, pairs, alerts }) => {
-  if (loading || charts.length === 0)
-    return (
-      <div className="dashboard-container">
-        <Spinner className="text-center p-3" />
-      </div>
-    );
+  const [assets, setAssets] = useState(null);
 
-  const mapAssets = pairs.map((pair, id) => {
-    return {
-      id,
-      pair,
-      active: pairs.length - 1 === id,
-      chart: charts.find(ch => ch.title === pair)
-    };
-  });
-
-  const [assets, setAssets] = useState(mapAssets);
+  useEffect(() => {
+    const mapAssets = pairs.map((pair, id) => {
+      return {
+        id,
+        pair,
+        active: pairs.length - 1 === id,
+        chart: charts.find(ch => ch.title === pair)
+      };
+    });
+    setAssets(mapAssets);
+  }, [loading, charts, pairs, alerts]);
 
   const selectChartHandler = (id, event) => {
     const newAssets = [...assets];
@@ -47,24 +43,30 @@ const DashboardPage = ({ loading, charts, pairs, alerts }) => {
 
   return (
     <div className="dashboard-container">
-      {assets.map(asset => {
-        return (
-          <div key={asset.id}>
-            <ChartWidget
-              asset={asset}
-              focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
-            />
-            <List
-              pairNames={charts.map(pair => pair.title)}
-              asset={asset}
-              focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
-              selectChartHandler={selectChartHandler.bind(null, asset.id)}
-            />
-            );
-            {alerts.length > 0 && <Notification alerts={alerts} />}
-          </div>
-        );
-      })}
+      {loading || assets === null || charts.length === 0 ? (
+        <Spinner className="text-center p-3" />
+      ) : (
+        assets.map(asset => {
+          return (
+            <div key={asset.id}>
+              {asset.chart && (
+                <ChartWidget
+                  asset={asset}
+                  focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
+                />
+              )}
+              <List
+                pairNames={charts.map(pair => pair.title)}
+                asset={asset}
+                focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
+                selectChartHandler={selectChartHandler.bind(null, asset.id)}
+              />
+              );
+              {alerts.length > 0 && <Notification alerts={alerts} />}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };

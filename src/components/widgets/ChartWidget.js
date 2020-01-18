@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import initialConstants from "../../initialConstants";
 
 const ChartWidget = ({ asset, focusWidgetHandler }) => {
-  const [x] = useState(initialConstants.chartPosition_x + 100 * +asset.id);
-  const [y] = useState(initialConstants.chartPosition_y + 100 * +asset.id);
+  const [x] = useState(initialConstants.chartPosition_x + 50 * +asset.id);
+  const [y] = useState(initialConstants.chartPosition_y + 60 * +asset.id);
   const [width, setWidth] = useState(initialConstants.chartWidth);
   const [height, setHeight] = useState(initialConstants.chartHeight);
 
@@ -18,7 +18,6 @@ const ChartWidget = ({ asset, focusWidgetHandler }) => {
       parseInt(ref.style.height.substr(0, ref.style.height.length - 2), 10)
     );
   };
-
   return (
     <Rnd
       className={`chart-container ${asset.active && "active-chart"}`}

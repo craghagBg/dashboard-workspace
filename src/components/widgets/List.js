@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import initialConstants from "../../initialConstants";
 
 const List = ({ pairNames, asset, focusWidgetHandler, selectChartHandler }) => {
-  const [x] = useState(initialConstants.listPosition_x + 100 * +asset.id);
-  const [y] = useState(initialConstants.listPosition_y + 100 * +asset.id);
+  const [x] = useState(initialConstants.listPosition_x);
+  const [y] = useState(initialConstants.listPosition_y + 50 * +asset.id);
   const [width] = useState(initialConstants.listWidth);
   const [height] = useState(initialConstants.listHeight);
   return (

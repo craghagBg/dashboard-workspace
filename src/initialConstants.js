@@ -1,5 +1,5 @@
 export default {
-  chartPosition_x: 10,
+  chartPosition_x: 300,
   chartPosition_y: 10,
   chartWidth: 800,
   chartHeight: 400,
