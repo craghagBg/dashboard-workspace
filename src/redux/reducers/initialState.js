@@ -1,8 +1,6 @@
 export default {
-  charts: {
-    chartsData: [],
-    currentChartName: "BTC/USD"
-  },
+  charts: [],
+  pairs: ["BTC/USD", "LTC/USD", "BCH/USD"],
   alerts: [],
   apiCallsInProgress: 0
 };

@@ -1,7 +1,8 @@
 import React from "react";
 import AddChart from "./AddChart";
 import { connect } from "react-redux";
-import * as chartActions from "../../redux/actions/chartActions";
+import * as pairsActions from "../../redux/actions/pairsActions";
+import * as chartsActions from "../../redux/actions/chartsActions";
 import * as alertActions from "../../redux/actions/alertActions";
 import { Nav, NavItem, NavLink, Navbar } from "reactstrap";
 import { bindActionCreators } from "redux";
@@ -18,7 +19,7 @@ class Header extends React.Component {
   componentDidMount() {
     const { charts, actions } = this.props;
 
-    if (charts.chartsData.length === 0) {
+    if (charts.length === 0) {
       actions.loadCharts().catch(error => {
         alert("Loading charts data failed" + error);
       });
@@ -31,12 +32,13 @@ class Header extends React.Component {
   }
 
   selectChartHandler(event) {
-    this.props.actions.setCurrentChart(event.target.textContent);
+    const { actions } = this.props;
+    actions.addChart(event.target.textContent);
   }
 
   render() {
-    const { chartsData } = this.props.charts;
-    const pairNames = chartsData.map(chart => chart.title);
+    const { charts } = this.props;
+    const pairNames = charts.map(chart => chart.title);
     return (
       <Navbar>
         <Nav className="mr-auto">
@@ -50,13 +52,13 @@ class Header extends React.Component {
             <NavLink href="/about">About</NavLink>
           </NavItem>
         </Nav>
-        {window.location.pathname === "/dashboard" && chartsData.length > 0 && (
+        {window.location.pathname === "/dashboard" && charts.length > 0 && (
           <AddChart
             pairNames={pairNames}
             selectChartHandler={this.selectChartHandler}
           />
         )}
-        {window.location.pathname === "/dashboard" && chartsData.length > 0 && (
+        {window.location.pathname === "/dashboard" && charts.length > 0 && (
           <CreateAlert
             pairNames={pairNames}
             createAlertHandler={this.createAlertHandler}
@@ -68,10 +70,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  charts: PropTypes.shape({
-    chartsData: PropTypes.array.isRequired,
-    currentChartName: PropTypes.string.isRequired
-  }),
+  charts: PropTypes.array.isRequired,
   alerts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
@@ -86,12 +85,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadCharts: bindActionCreators(chartActions.loadCharts, dispatch),
+      loadCharts: bindActionCreators(chartsActions.loadCharts, dispatch),
       createAlert: bindActionCreators(alertActions.createAlert, dispatch),
-      setCurrentChart: bindActionCreators(
-        chartActions.setCurrentChart,
-        dispatch
-      )
+      addChart: bindActionCreators(pairsActions.addChart, dispatch)
     }
   };
 }

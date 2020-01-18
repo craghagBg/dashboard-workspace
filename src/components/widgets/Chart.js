@@ -7,8 +7,8 @@ class Chart extends React.Component {
   candleSeries = {};
 
   componentDidMount() {
-    const { width, height, currentChart } = this.props;
-    this.chart = createChart(document.getElementById("chart"), {
+    const { width, height, asset } = this.props;
+    this.chart = createChart(document.getElementById(asset.id), {
       width,
       height,
       layout: {
@@ -25,28 +25,33 @@ class Chart extends React.Component {
       }
     });
     this.candleSeries = this.chart.addCandlestickSeries({
-      title: currentChart.title
+      title: asset.chart.title
     });
-    this.candleSeries.setData(currentChart.data);
+    this.candleSeries.setData(asset.chart.data);
   }
 
   componentDidUpdate() {
-    this.chart.resize(this.props.height, this.props.width);
-    this.candleSeries.setData(this.props.currentChart.data);
+    const { width, height, asset } = this.props;
+    this.chart.resize(height, width);
+    this.candleSeries.setData(asset.chart.data);
     this.candleSeries.applyOptions({
-      title: this.props.currentChart.title
+      title: asset.chart.title
     });
   }
 
   render() {
-    return <div id="chart" />;
+    return <div id={this.props.asset.id} />;
   }
 }
 
 Chart.propTypes = {
-  currentChart: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired
+  asset: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    pair: PropTypes.string,
+    chart: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      data: PropTypes.array.isRequired
+    })
   }),
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired

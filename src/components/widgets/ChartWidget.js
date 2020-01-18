@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Rnd } from "react-rnd";
 import Chart from "./Chart";
 import PropTypes from "prop-types";
 import initialConstants from "../../initialConstants";
 
-const ChartWidget = ({ charts }) => {
-  const [x] = useState(initialConstants.chartPosition_x);
-  const [y] = useState(initialConstants.chartPosition_y);
+const ChartWidget = ({ asset, focusWidgetHandler }) => {
+  const [x] = useState(initialConstants.chartPosition_x + 100 * +asset.id);
+  const [y] = useState(initialConstants.chartPosition_y + 100 * +asset.id);
   const [width, setWidth] = useState(initialConstants.chartWidth);
   const [height, setHeight] = useState(initialConstants.chartHeight);
-  const [currentChart, setCurrentChart] = useState(null);
-
-  useEffect(() => {
-    setCurrentChart(
-      charts.chartsData.find(chart => chart.title === charts.currentChartName)
-    );
-  }, [charts]);
 
   const resizeHandler = (e, direction, ref) => {
     setWidth(
@@ -27,26 +20,29 @@ const ChartWidget = ({ charts }) => {
   };
 
   return (
-    <>
-      {currentChart && (
-        <Rnd
-          className="chart-container"
-          default={{ x, y, width, height }}
-          bounds="parent"
-          onResizeStop={resizeHandler}
-        >
-          <Chart currentChart={currentChart} width={width} height={height} />
-        </Rnd>
-      )}
-    </>
+    <Rnd
+      className={`chart-container ${asset.active && "active-chart"}`}
+      default={{ x, y, width, height }}
+      bounds=".dashboard-container"
+      onResizeStop={resizeHandler}
+      onClick={focusWidgetHandler}
+    >
+      <Chart asset={asset} width={width} height={height} />
+    </Rnd>
   );
 };
 
 ChartWidget.propTypes = {
-  charts: PropTypes.shape({
-    chartsData: PropTypes.array.isRequired,
-    currentChartName: PropTypes.string.isRequired
-  })
+  asset: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    active: PropTypes.bool.isRequired,
+    pair: PropTypes.string,
+    chart: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      data: PropTypes.array.isRequired
+    })
+  }),
+  focusWidgetHandler: PropTypes.func.isRequired
 };
 
 export default ChartWidget;
