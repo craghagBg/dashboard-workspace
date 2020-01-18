@@ -31,7 +31,6 @@ class Chart extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger;
     const { width, height, asset } = this.props;
     this.chart.resize(height, width);
     this.candleSeries.setData(asset.chart.data);

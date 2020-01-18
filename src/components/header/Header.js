@@ -1,12 +1,10 @@
 import React from "react";
-import AddChart from "./AddChart";
 import { connect } from "react-redux";
 import * as pairsActions from "../../redux/actions/pairsActions";
 import * as chartsActions from "../../redux/actions/chartsActions";
 import * as alertActions from "../../redux/actions/alertActions";
 import { Nav, NavItem, NavLink, Navbar } from "reactstrap";
 import { bindActionCreators } from "redux";
-import CreateAlert from "./CreateAlert";
 import PropTypes from "prop-types";
 
 class Header extends React.Component {
@@ -37,7 +35,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { charts } = this.props;
+    const { charts, addChart, createAlert } = this.props;
     const pairNames = charts.map(chart => chart.title);
     return (
       <Navbar>
@@ -52,24 +50,26 @@ class Header extends React.Component {
             <NavLink href="/about">About</NavLink>
           </NavItem>
         </Nav>
-        {window.location.pathname === "/dashboard" && charts.length > 0 && (
-          <AddChart
-            pairNames={pairNames}
-            selectChartHandler={this.selectChartHandler}
-          />
-        )}
-        {window.location.pathname === "/dashboard" && charts.length > 0 && (
-          <CreateAlert
-            pairNames={pairNames}
-            createAlertHandler={this.createAlertHandler}
-          />
-        )}
+        {addChart &&
+          charts.length &&
+          addChart({
+            pairNames,
+            selectChartHandler: this.selectChartHandler
+          })}
+        {createAlert &&
+          charts.length &&
+          createAlert({
+            pairNames,
+            createAlertHandler: this.createAlertHandler
+          })}
       </Navbar>
     );
   }
 }
 
 Header.propTypes = {
+  addChart: PropTypes.func.isRequired,
+  createAlert: PropTypes.func.isRequired,
   charts: PropTypes.array.isRequired,
   alerts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired

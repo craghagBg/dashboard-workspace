@@ -49,10 +49,10 @@ nav {
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;
 }
-.list {
+.widget {
   z-index: 2;
 }
-.list-active {
+.widget-active {
   z-index: 3;
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;

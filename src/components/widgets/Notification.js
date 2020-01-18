@@ -10,10 +10,9 @@ const Notification = ({ alerts }) => {
   const [height] = useState(initialConstants.notificationHeight);
 
   const current = alerts[alerts.length - 1];
-
   return (
     <Rnd
-      className="p-2 primery-bg select default text-center"
+      className="p-2 primery-bg select default text-center widget"
       default={{ x, y, width, height }}
       bounds="parent"
       enableResizing="false"

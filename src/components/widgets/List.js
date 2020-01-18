@@ -13,7 +13,7 @@ const List = ({ pairNames, asset, focusWidgetHandler, selectChartHandler }) => {
       {pairNames.length > 0 && (
         <Rnd
           className={`d-flex p-2 primery-bg select default ${
-            asset.active ? "list-active" : "list"
+            asset.active ? "widget-active" : "widget"
           }`}
           default={{ x, y, width, height }}
           bounds=".dashboard-container"
@@ -42,7 +42,16 @@ const List = ({ pairNames, asset, focusWidgetHandler, selectChartHandler }) => {
 List.propTypes = {
   pairNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   focusWidgetHandler: PropTypes.func.isRequired,
-  selectChartHandler: PropTypes.func.isRequired
+  selectChartHandler: PropTypes.func.isRequired,
+  asset: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    active: PropTypes.bool.isRequired,
+    pair: PropTypes.string,
+    chart: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      data: PropTypes.array.isRequired
+    })
+  })
 };
 
 export default List;
