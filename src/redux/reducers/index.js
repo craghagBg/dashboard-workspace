@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import pairs from "./pairsReducer";
-import charts from "./chartsReducer";
+import pairs from "./pairReducer";
+import charts from "./chartReducer";
 import alerts from "./alertReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 

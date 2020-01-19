@@ -3,8 +3,9 @@ import { Rnd } from "react-rnd";
 import Chart from "./Chart";
 import PropTypes from "prop-types";
 import initialConstants from "../../initialConstants";
+import CloseButton from "../common/CloseButton";
 
-const ChartWidget = ({ asset, focusWidgetHandler }) => {
+const ChartWidget = ({ asset, focusWidgetHandler, closeHandler }) => {
   const [x] = useState(initialConstants.chartPosition_x + 50 * +asset.id);
   const [y] = useState(initialConstants.chartPosition_y + 60 * +asset.id);
   const [width, setWidth] = useState(initialConstants.chartWidth);
@@ -27,6 +28,7 @@ const ChartWidget = ({ asset, focusWidgetHandler }) => {
       onClick={focusWidgetHandler}
     >
       <Chart asset={asset} width={width} height={height} />
+      <CloseButton closeHandler={closeHandler} />
     </Rnd>
   );
 };
@@ -41,6 +43,7 @@ ChartWidget.propTypes = {
       data: PropTypes.array.isRequired
     })
   }),
+  closeHandler: PropTypes.func.isRequired,
   focusWidgetHandler: PropTypes.func.isRequired
 };
 

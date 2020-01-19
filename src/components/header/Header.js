@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as pairsActions from "../../redux/actions/pairsActions";
-import * as chartsActions from "../../redux/actions/chartsActions";
-import * as alertActions from "../../redux/actions/alertActions";
+import { addPair } from "../../redux/actions/pairActions";
+import { createAlert } from "../../redux/actions/alertActions";
+import { loadCharts } from "../../redux/actions/chartActions";
 import { Nav, NavItem, NavLink, Navbar } from "reactstrap";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
@@ -72,7 +72,11 @@ Header.propTypes = {
   createAlert: PropTypes.func.isRequired,
   charts: PropTypes.array.isRequired,
   alerts: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.shape({
+    loadCharts: PropTypes.func.isRequired,
+    createAlert: PropTypes.func.isRequired,
+    addPair: PropTypes.func.isRequired
+  })
 };
 
 function mapStateToProps(state) {
@@ -85,9 +89,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadCharts: bindActionCreators(chartsActions.loadCharts, dispatch),
-      createAlert: bindActionCreators(alertActions.createAlert, dispatch),
-      addPair: bindActionCreators(pairsActions.addPair, dispatch)
+      loadCharts: bindActionCreators(loadCharts, dispatch),
+      createAlert: bindActionCreators(createAlert, dispatch),
+      addPair: bindActionCreators(addPair, dispatch)
     }
   };
 }

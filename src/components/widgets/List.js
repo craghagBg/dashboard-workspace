@@ -12,7 +12,7 @@ const List = ({ pairNames, asset, focusWidgetHandler, selectChartHandler }) => {
     <>
       {pairNames.length > 0 && (
         <Rnd
-          className={`d-flex p-2 primery-bg select default ${
+          className={`d-flex primery-bg select default ${
             asset.active ? "widget-active" : "widget"
           }`}
           default={{ x, y, width, height }}

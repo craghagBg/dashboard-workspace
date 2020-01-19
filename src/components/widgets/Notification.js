@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Rnd } from "react-rnd";
 import PropTypes from "prop-types";
 import initialConstants from "../../initialConstants";
+import CloseButton from "../common/CloseButton";
 
-const Notification = ({ alerts }) => {
+const Notification = ({ alerts, closeHandler }) => {
   const [x] = useState(initialConstants.notificationPosition_x);
   const [y] = useState(initialConstants.notificationPosition_y);
   const [width] = useState(initialConstants.notificationWidth);
@@ -17,6 +18,7 @@ const Notification = ({ alerts }) => {
       bounds="parent"
       enableResizing="false"
     >
+      <CloseButton onClick={closeHandler} />
       <h3 className="text-center">
         <p> 🔔</p>
         <p>Alert on {current.pair}</p>
@@ -29,7 +31,8 @@ const Notification = ({ alerts }) => {
 };
 
 Notification.propTypes = {
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  closeHandler: PropTypes.func.isRequired
 };
 
 export default Notification;

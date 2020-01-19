@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import HomePage from "./home/HomePage";
-import AboutPage from "./about/AboutPage";
-import PageNotFound from "./PageNotFound";
+import HomePage from "./common/HomePage";
+import AboutPage from "./common/AboutPage";
+import PageNotFound from "./common//PageNotFound";
 import DashboardPage from "./dashboard/DashboardPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
