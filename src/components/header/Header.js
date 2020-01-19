@@ -31,7 +31,7 @@ class Header extends React.Component {
 
   selectChartHandler(event) {
     const { actions } = this.props;
-    actions.addChart(event.target.textContent);
+    actions.addPair(event.target.textContent);
   }
 
   render() {
@@ -87,7 +87,7 @@ function mapDispatchToProps(dispatch) {
     actions: {
       loadCharts: bindActionCreators(chartsActions.loadCharts, dispatch),
       createAlert: bindActionCreators(alertActions.createAlert, dispatch),
-      addChart: bindActionCreators(pairsActions.addChart, dispatch)
+      addPair: bindActionCreators(pairsActions.addPair, dispatch)
     }
   };
 }

@@ -8,6 +8,7 @@ class Chart extends React.Component {
 
   componentDidMount() {
     const { width, height, asset } = this.props;
+
     this.chart = createChart(document.getElementById(asset.id), {
       width,
       height,
@@ -27,13 +28,13 @@ class Chart extends React.Component {
     this.candleSeries = this.chart.addCandlestickSeries({
       title: asset.chart.title
     });
-    this.candleSeries.setData(asset.chart.data);
+    this.candleSeries.setData(JSON.parse(JSON.stringify(asset.chart.data)));
   }
 
   componentDidUpdate() {
     const { width, height, asset } = this.props;
     this.chart.resize(height, width);
-    this.candleSeries.setData(asset.chart.data);
+    this.candleSeries.setData(JSON.parse(JSON.stringify(asset.chart.data)));
     this.candleSeries.applyOptions({
       title: asset.chart.title
     });

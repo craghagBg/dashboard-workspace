@@ -2105,7 +2105,13 @@ const pairs = [
   {
     title: "XRP/USD",
     data: [
-      { time: "2018-10-19", open: 54.62, high: 55.5, low: 54.52, close: 54.9 },
+      {
+        time: "2018-10-19",
+        open: 54.62,
+        high: 55.5,
+        low: 54.52,
+        close: 54.9
+      },
       {
         time: "2018-10-22",
         open: 55.08,
@@ -3854,28 +3860,34 @@ const pairs = [
   {
     title: "LTC/USD",
     data: [
-      { time: "2018-10-19", open: 54.62, high: 55.5, low: 54.52, close: 54.9 },
+      {
+        time: "2018-10-19",
+        open: 180.34,
+        high: 180.99,
+        low: 178.57,
+        close: 179.85
+      },
       {
         time: "2018-10-22",
-        open: 55.08,
-        high: 55.27,
-        low: 54.61,
-        close: 54.98
+        open: 255.08,
+        high: 255.27,
+        low: 254.61,
+        close: 254.98
       },
       {
         time: "2018-10-23",
-        open: 56.09,
-        high: 57.47,
-        low: 56.09,
-        close: 57.21
+        open: 256.09,
+        high: 257.47,
+        low: 256.09,
+        close: 257.21
       },
       { time: "2018-10-24", open: 57.0, high: 58.44, low: 56.41, close: 57.42 },
       {
         time: "2018-10-25",
-        open: 57.46,
-        high: 57.63,
-        low: 56.17,
-        close: 56.43
+        open: 257.46,
+        high: 257.63,
+        low: 256.17,
+        close: 256.43
       },
       {
         time: "2018-10-26",

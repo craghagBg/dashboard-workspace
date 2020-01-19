@@ -3,7 +3,7 @@ import initialState from "./initialState";
 
 export default (state = initialState.pairs, action) => {
   switch (action.type) {
-    case types.ADD_CHART:
+    case types.ADD_PAIR:
       return [...state, action.pair];
     default:
       return state;

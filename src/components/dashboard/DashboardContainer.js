@@ -19,6 +19,7 @@ const DashboardContainer = ({ loading, charts, pairs, alerts }) => {
         chart: charts.find(ch => ch.title === pair)
       };
     });
+
     setAssets(mapAssets);
   }, [loading, charts, pairs, alerts]);
 
