@@ -28,7 +28,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "src/index.html",
-      favicon: "src/favicon.ico"
+      favicon: "resources/favicon.ico"
     })
   ],
   module: {
@@ -41,6 +41,11 @@ module.exports = {
       {
         test: /(\.css)$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        loader: "style-loader!css-loader!less-loader"
       }
     ]
   }

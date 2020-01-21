@@ -45,8 +45,8 @@ const DashboardContainer = ({ loading, charts, pairs, alerts, actions }) => {
     setAssets(newAssets);
   };
 
-  const closeAlert = id => actions.deleteAlert(id);
-  const closeChart = id => actions.deletePair(id);
+  const deleteAlert = id => actions.deleteAlert(id);
+  const deleteChart = id => actions.deletePair(id);
 
   return (
     <div className="dashboard-container">
@@ -60,7 +60,7 @@ const DashboardContainer = ({ loading, charts, pairs, alerts, actions }) => {
                 <ChartWidget
                   asset={asset}
                   focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
-                  closeHandler={closeChart.bind(null, asset.id)}
+                  closeHandler={deleteChart.bind(null, asset.id)}
                 />
               )}
               <List
@@ -74,7 +74,7 @@ const DashboardContainer = ({ loading, charts, pairs, alerts, actions }) => {
         })
       )}
       {alerts.length > 0 && (
-        <Notification alerts={alerts} closeHandler={closeAlert.bind(null)} />
+        <Notification alerts={alerts} deleteAlertHandler={deleteAlert} />
       )}
     </div>
   );

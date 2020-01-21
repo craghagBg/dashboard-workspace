@@ -1,3 +1,6 @@
+@bg-color: #1f1e36;
+@txt-color: white;
+
 html,
 body,
 #app {
@@ -5,15 +8,15 @@ body,
   width: 100%;
   height: 100%;
   font-family: "Times New Roman", Times, serif;
-  color: white;
+  color: @txt-color;
 }
 
 a {
-  color: white;
-}
-a:active,
-a:focus {
-  color: #f15b2a;
+  color: @txt-color;
+  &:active,
+  &:focus {
+    color: #f15b2a;
+  }
 }
 
 #app {
@@ -27,8 +30,24 @@ nav {
 }
 
 .default {
-  color: #fff;
-  background-color: #1f1e36;
+  background-color: @bg-color;
+  color: @txt-color;
+}
+
+.inner {
+  &:hover,
+  &:focus,
+  &:active,
+  &.default.dropdown-toggle.btn.btn-primary,
+  &.default.dropdown-toggle.btn.btn-primary:active {
+    background-color: @bg-color;
+    color: @txt-color;
+    border: 0px;
+    outline: none;
+    box-shadow: none;
+  }
+  border: 0px;
+  outline: none;
 }
 
 .select {
@@ -41,7 +60,7 @@ nav {
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.12),
     0 20px 20px 0 rgba(0, 0, 0, 0.219);
   border-radius: 3px;
-  border: 2px double #1f1e36;
+  border: 2px double @bg-color;
   overflow: hidden;
 }
 .active-chart {
@@ -51,6 +70,13 @@ nav {
 }
 .widget {
   z-index: 2;
+  &:focus,
+  &:hover,
+  &:active {
+    z-index: 3;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+  }
 }
 .widget-active {
   z-index: 3;
@@ -69,7 +95,7 @@ nav {
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.12),
     0 20px 20px 0 rgba(0, 0, 0, 0.219);
   border-radius: 3px;
-  border: 2px double #1f1e36;
+  border: 2px double @bg-color;
   overflow: hidden;
 }
 
@@ -89,11 +115,6 @@ select {
   appearance: none;
 }
 
-.chart-icon {
-  background-color: #1f1e36;
-  border: 0px;
-}
-
 .text-app-color {
-  color: white;
+  color: @txt-color;
 }

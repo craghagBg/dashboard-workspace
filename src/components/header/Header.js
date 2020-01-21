@@ -51,13 +51,13 @@ class Header extends React.Component {
           </NavItem>
         </Nav>
         {addChart &&
-          charts.length &&
+          charts.length > 0 &&
           addChart({
             pairNames,
             selectChartHandler: this.selectChartHandler
           })}
         {createAlert &&
-          charts.length &&
+          charts.length > 0 &&
           createAlert({
             pairNames,
             createAlertHandler: this.createAlertHandler
@@ -68,8 +68,8 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  addChart: PropTypes.func.isRequired,
-  createAlert: PropTypes.func.isRequired,
+  addChart: PropTypes.func,
+  createAlert: PropTypes.func,
   charts: PropTypes.array.isRequired,
   alerts: PropTypes.array.isRequired,
   actions: PropTypes.shape({

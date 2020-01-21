@@ -27,7 +27,12 @@ const CreateAlert = ({ pairNames, createAlertHandler }) => {
           <Modal.Title>Create Alert</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form
+            onSubmit={event => {
+              event.preventDefault();
+              handleSubmit();
+            }}
+          >
             <Form.Row>
               <Form.Group as={Col}>
                 <Form.Label>Ceate Alert On:</Form.Label>
