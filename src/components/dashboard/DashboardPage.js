@@ -3,7 +3,6 @@ import DashboardContainer from "./DashboardContainer";
 import Header from "../header/Header";
 import AddChart from "../header/AddChart";
 import CreateAlert from "../header/CreateAlert";
-// import { toast } from "react-toastify";
 
 const DashboardPage = () => {
   const addChart = props => <AddChart {...props} />;

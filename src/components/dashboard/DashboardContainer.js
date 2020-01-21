@@ -5,7 +5,6 @@ import { deleteAlert } from "../../redux/actions/alertActions";
 import { deletePair } from "../../redux/actions/pairActions";
 import PropTypes from "prop-types";
 import Spinner from "../common/spiner/Spinner";
-// import { toast } from "react-toastify";
 import ChartWidget from "../widgets/ChartWidget";
 import List from "../widgets/List";
 import Notification from "../widgets/Notification";

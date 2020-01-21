@@ -31,7 +31,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "src/index.html",
-      favicon: "src/favicon.ico",
+      favicon: "resources/favicon.ico",
       minify: {
         // see https://github.com/kangax/html-minifier#options-quick-reference
         removeComments: true,
@@ -72,6 +72,11 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        loader: "style-loader!css-loader!less-loader"
       }
     ]
   }
