@@ -33,7 +33,6 @@ const Notification = ({ alerts, deleteAlertHandler }) => {
   };
 
   const closeHandler = () => {
-    debugger;
     deleteAlertHandler(alerts.indexOf(current));
   };
 
@@ -53,9 +52,13 @@ const Notification = ({ alerts, deleteAlertHandler }) => {
               Alert on {current.pair} {current.value}
             </p>
           </Dropdown.Toggle>
-          <Dropdown.Menu>
+          <Dropdown.Menu className="default">
             {alerts.map((a, key) => (
-              <Dropdown.Item key={key} onClick={selectHandler}>
+              <Dropdown.Item
+                className="default"
+                key={key}
+                onClick={selectHandler}
+              >
                 {a.pair} {a.value}
               </Dropdown.Item>
             ))}
