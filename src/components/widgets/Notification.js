@@ -44,8 +44,8 @@ const Notification = ({ alerts, deleteAlertHandler }) => {
       enableResizing="false"
     >
       <CloseButton closeHandler={closeHandler} />
+      <h1> 🔔</h1>
       <h3 className="text-center">
-        <p> 🔔</p>
         <Dropdown onChange={selectHandler}>
           <Dropdown.Toggle className="default inner">
             <p>
@@ -65,7 +65,6 @@ const Notification = ({ alerts, deleteAlertHandler }) => {
           </Dropdown.Menu>
         </Dropdown>
       </h3>
-      a
     </Rnd>
   );
 };
