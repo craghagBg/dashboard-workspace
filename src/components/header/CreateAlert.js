@@ -21,7 +21,7 @@ const CreateAlert = ({ pairNames, createAlertHandler }) => {
 
   return (
     <>
-      <div onClick={handleShow}>🔔</div>
+      <div onClick={handleShow}>Create Alert 🔔</div>
       <Modal show={show} onHide={handleClose} dialogClassName="text-dark">
         <Modal.Header closeButton>
           <Modal.Title>Create Alert</Modal.Title>

@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 const AddChart = ({ pairNames, selectChartHandler }) => (
   <Dropdown alignRight>
-    <Dropdown.Toggle className="default inner">📈</Dropdown.Toggle>
+    <Dropdown.Toggle className="default inner">Add Chart 📈</Dropdown.Toggle>
     <Dropdown.Menu className="default">
       {pairNames.map((pair, key) => (
         <Dropdown.Item
