@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardContainer from "./DashboardContainer";
-import Header from "../header/Header";
+import HeaderContainer from "../header/HeaderContainer";
 import AddChart from "../header/AddChart";
 import CreateAlert from "../header/CreateAlert";
 
@@ -10,7 +10,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Header addChart={addChart} createAlert={createAlert} />
+      <HeaderContainer addChart={addChart} createAlert={createAlert} />
       <DashboardContainer />
     </>
   );

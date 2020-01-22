@@ -5,6 +5,5 @@ export function addPair(id, title) {
 }
 
 export function deletePair(id) {
-  debugger;
   return { type: types.DELETE_PAIR, id };
 }

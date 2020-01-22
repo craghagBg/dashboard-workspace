@@ -1,7 +1,7 @@
 export default {
   chartPosition_x: 300,
   chartPosition_y: 10,
-  chartWidth: 800,
+  chartWidth: 600,
   chartHeight: 400,
   listPosition_x: 20,
   listPosition_y: 20,
