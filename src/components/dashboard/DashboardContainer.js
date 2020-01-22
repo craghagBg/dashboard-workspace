@@ -13,12 +13,13 @@ const DashboardContainer = ({ loading, charts, pairs, alerts, actions }) => {
   const [assets, setAssets] = useState(null);
 
   useEffect(() => {
-    const mapAssets = pairs.map((pair, id) => {
+    const mapAssets = pairs.map((pair, i) => {
       return {
-        id,
-        pair,
-        active: pairs.length - 1 === id,
-        chart: charts.find(ch => ch.title === pair)
+        id: pair.id,
+        num: i,
+        pair: pair.title,
+        active: pairs.length - 1 === i,
+        chart: charts.find(ch => ch.title === pair.title)
       };
     });
 
@@ -58,6 +59,7 @@ const DashboardContainer = ({ loading, charts, pairs, alerts, actions }) => {
               {asset.chart && (
                 <ChartWidget
                   asset={asset}
+                  num={asset.num}
                   focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
                   closeHandler={deleteChart.bind(null, asset.id)}
                 />
@@ -65,6 +67,7 @@ const DashboardContainer = ({ loading, charts, pairs, alerts, actions }) => {
               <List
                 pairNames={charts.map(pair => pair.title)}
                 asset={asset}
+                num={asset.num}
                 focusWidgetHandler={focusWidgetHandler.bind(null, asset.id)}
                 selectChartHandler={selectChartHandler.bind(null, asset.id)}
               />

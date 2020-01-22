@@ -5,7 +5,7 @@ import initialConstants from "../../initialConstants";
 
 const List = ({ pairNames, asset, focusWidgetHandler, selectChartHandler }) => {
   const [x] = useState(initialConstants.listPosition_x);
-  const [y] = useState(initialConstants.listPosition_y + 50 * +asset.id);
+  const [y] = useState(initialConstants.listPosition_y + 50 * asset.num);
   const [width] = useState(initialConstants.listWidth);
   const [height] = useState(initialConstants.listHeight);
   return (

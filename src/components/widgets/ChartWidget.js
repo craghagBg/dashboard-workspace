@@ -6,8 +6,8 @@ import initialConstants from "../../initialConstants";
 import CloseButton from "../common/CloseButton";
 
 const ChartWidget = ({ asset, focusWidgetHandler, closeHandler }) => {
-  const [x] = useState(initialConstants.chartPosition_x + 50 * +asset.id);
-  const [y] = useState(initialConstants.chartPosition_y + 60 * +asset.id);
+  const [x] = useState(initialConstants.chartPosition_x + 50 * asset.num);
+  const [y] = useState(initialConstants.chartPosition_y + 60 * asset.num);
   const [width, setWidth] = useState(initialConstants.chartWidth);
   const [height, setHeight] = useState(initialConstants.chartHeight);
 

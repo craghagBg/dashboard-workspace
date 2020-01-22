@@ -1,6 +1,6 @@
 export default {
   charts: [],
-  pairs: ["BTC/USD"],
+  pairs: [{ id: 0, title: "BTC/USD" }],
   alerts: [],
   apiCallsInProgress: 0
 };

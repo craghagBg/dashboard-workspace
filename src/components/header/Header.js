@@ -11,7 +11,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.createAlertHandler = this.createAlertHandler.bind(this);
-    this.selectChartHandler = this.selectChartHandler.bind(this);
+    this.createChartHandler = this.createChartHandler.bind(this);
   }
 
   componentDidMount() {
@@ -24,14 +24,23 @@ class Header extends React.Component {
     }
   }
 
+  createId = () => {
+    let id;
+    /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
+    while (true) {
+      id = Math.floor(Math.random() * Math.floor(100));
+      if (!this.props.pairs.find(pair => pair.id === id)) return id;
+    }
+  };
+
   createAlertHandler(pair) {
     const { actions } = this.props;
     actions.createAlert(pair);
   }
 
-  selectChartHandler(event) {
+  createChartHandler(event) {
     const { actions } = this.props;
-    actions.addPair(event.target.textContent);
+    actions.addPair(this.createId(), event.target.textContent);
   }
 
   render() {
@@ -54,7 +63,7 @@ class Header extends React.Component {
           charts.length > 0 &&
           addChart({
             pairNames,
-            selectChartHandler: this.selectChartHandler
+            selectChartHandler: this.createChartHandler
           })}
         {createAlert &&
           charts.length > 0 &&
@@ -72,6 +81,7 @@ Header.propTypes = {
   createAlert: PropTypes.func,
   charts: PropTypes.array.isRequired,
   alerts: PropTypes.array.isRequired,
+  pairs: PropTypes.array.isRequired,
   actions: PropTypes.shape({
     loadCharts: PropTypes.func.isRequired,
     createAlert: PropTypes.func.isRequired,
@@ -82,7 +92,8 @@ Header.propTypes = {
 function mapStateToProps(state) {
   return {
     charts: state.charts,
-    alerts: state.alerts
+    alerts: state.alerts,
+    pairs: state.pairs
   };
 }
 
